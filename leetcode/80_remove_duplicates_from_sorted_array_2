@@ -1,0 +1,18 @@
+package leetcode
+
+func removeDuplicates(nums []int) int {
+	// 두번까지 나와도 됨
+	rk := 0
+	for i, v := range nums {
+		if i > 1 {
+			// 앞으로 이미 땡겨버린 경우가 있을 수 있다.
+			// 두개는 조사해야한다.
+			// 다만 i-1, i-2가 아니라 i-(rk+1) i-(rk+2)로 해야함
+			if nums[i-(rk+1)] == v && nums[i-(rk+2)] == v {
+				rk++
+			}
+		}
+		nums[i-rk] = v
+	}
+	return len(nums) - rk
+}
